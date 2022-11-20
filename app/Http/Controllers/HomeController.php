@@ -65,4 +65,18 @@ class HomeController extends Controller
     {
         return view('backend.pages.account');
     }
+
+    public function updateaccount(Request $request)
+    {
+         //validation rules
+
+     
+        $user =Auth::user();
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->phone = $request['phone'];
+        $user->address = $request['address'];
+        $user->save();
+        return back()->with('message','Profile Updated');
+    }
 }

@@ -31,6 +31,7 @@ Route::get('/transaction', [App\Http\Controllers\HomeController::class, 'transac
 
 //Account Route
 Route::get('/account', [App\Http\Controllers\HomeController::class, 'account'])->name('account');
+Route::post('/account', [App\Http\Controllers\HomeController::class, 'updateaccount'])->name('updateaccount');
 
 
 
