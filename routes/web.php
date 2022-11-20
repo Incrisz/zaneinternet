@@ -28,6 +28,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::get('/wallet', [PaymentController::class, 'wallet'])->name('wallet');
-Route::post('/pay', [PaymentController::class, 'make_payment'])->name('pay');
+Route::post('/debit', [PaymentController::class, 'make_payment'])->name('pay');
 Route::get('/pay/callback', [PaymentController::class, 'payment_callback'])->name('pay.callback');
 

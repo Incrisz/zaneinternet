@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-8 col-md-7">
-                        @if(session()->has('error')) {{session()->get('error')}} @endif
+                       <p style="color:red;">@if(session()->has('error')) {{session()->get('error')}} @endif</p> 
 
                             <div class="table-area">
                                                             
@@ -36,20 +36,21 @@
                                     <div class="send-banance">
                                         <span class="mdr">How much do you want to add?</span>
                                         <div class="input-area">
-                                            <input class="xxlr" name="ammount" placeholder="400.00" type="number" required>
+                                            <input class="xxlr" name="amount" placeholder="400.00" type="number" required>
                                             <select>
                                                 <option value="1">NGN</option>
                                                
                                             </select>
                                         </div>
-                                        <p>Available Balance<b>₦30,700.00</b></p>
+                                        <p>Available Balance<b>₦{{Auth::user()->wallet_balance}}</b></p>
                                     </div>  
+                                    <div class="footer-area mt-40">
+                                <button style="background-color:#00b0fe" class="active">Pay Now</button>
+                            </div>
+                                    
                                 </form>
                             </div>
-                            <div class="footer-area mt-40">
-                                <!-- <a href="deposit-money-1.html">Previous Step</a> -->
-                                <a href="#" class="active">Pay Now</a>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

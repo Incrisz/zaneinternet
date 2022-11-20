@@ -8,13 +8,15 @@
         <div class="overlay pt-120">
             <div class="container-fruid">
                 <div class="row">
+                <p style="color:red;">@if(session()->has('error')) {{session()->get('error')}} @endif</p> 
+
                     <div class="col-xl-8 col-lg-7">
                         <div class="section-content">
                             <div class="acc-details">
                                 <div class="top-area">
                                     <div class="left-side">
                                         <h5>Hi, {{Auth::user()->name}} !</h5>
-                                        <h2>₦30,700.00</h2>
+                                        <h2>₦{{Auth::user()->wallet_balance}}</h2>
                                         <!-- <h5 class="receive">Last Received <span>$25,700.00</span></h5> -->
                                     </div>
                                    
@@ -22,7 +24,7 @@
                                 <div class="bottom-area">
                                     <div class="left-side">
                                         <!-- <a href="pay.html" class="cmn-btn">Transfer Money</a> -->
-                                        <a href="deposit-money-2.html" class="cmn-btn">Add Money</a>
+                                        <a href="{{route('wallet')}}" class="cmn-btn">Add Money</a>
                                         <!-- <a href="withdraw-money-step-1.html" class="cmn-btn">Withdraw</a> -->
                                     </div>
                                   

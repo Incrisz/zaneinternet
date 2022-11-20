@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -13,29 +14,38 @@ class PaymentController extends Controller
     public function make_payment()
     {
         $formData = [
-            'email' => request('email'),
+            'first_name' => Auth::user()->name,
+            'email' => Auth::user()->email,
             'amount' => request('amount') * 100,
             'callback_url' => route('pay.callback')
         ];
         $pay = json_decode($this->initiate_payment($formData));
+        // dd($pay);
         if ($pay) {
             if ($pay->status) {
-                return redirect($pay->data->authorization_url);
+                return redirect($pay->data->authorization_url);  //This is what redirects us to paystack payment page
             } else {
                 return back()->withError($pay->message);
             }
         } else {
-            return back()->withError("Something went wrong");
+            return back()->withError("No Internet Connection");
         }
     }
 
     public function payment_callback()
     {
-        $response = json_decode($this->verify_payment(request('reference')));
+        $response = json_decode($this->verify_payment(request('reference'))); //gets all the info needed
+        // dd($response);
+
         if ($response) {
             if ($response->status) {
-                $data = $response->data;
-                return view('pay.callback_page')->with(compact(['data']));
+                $data = $response->data;   // collects all user payment info
+                $amount = $data->amount / 100;   //Divide the amount back to real fund
+                $user = User::find(Auth::user()->id);  //Find the Auth user to fund wallet
+                $user->deposit($amount);
+
+                return redirect()->route('home')->withError("Wallet Funded Successfully");
+                // return view('backend.pages.wallet')->with(compact(['data']));
             } else {
                 return back()->withError($response->message);
             }
@@ -55,7 +65,7 @@ class PaymentController extends Controller
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer " . sk_test_8acec9d0fa7eb2dd5ffb0ada81ed471ab38c761c,
+            "Authorization: Bearer sk_test_8acec9d0fa7eb2dd5ffb0ada81ed471ab38c761c",
             "Cache-Control: no-cache",
         ));
 
@@ -80,7 +90,7 @@ class PaymentController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer " . sk_test_8acec9d0fa7eb2dd5ffb0ada81ed471ab38c761c,
+                "Authorization: Bearer sk_test_8acec9d0fa7eb2dd5ffb0ada81ed471ab38c761c",
                 "Cache-Control: no-cache",
             ),
         ));
