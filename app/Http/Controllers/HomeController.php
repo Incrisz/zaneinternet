@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Service;
+use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,11 +25,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.dashboard');
+        $services = Service::all();
+        return view('backend.pages.dashboard', compact(['services']));
     }
 
     public function wallet()
     {
         return view('backend.pages.wallet');
+    }
+
+    public function withdraw()
+    {
+        $data = [
+            "id" => request("id"),
+            "name" => request("name"),
+            "amount" => request("amount"),
+        ];
+       $user =User::find(Auth::user()->id);
+       $user->withdraw($data['amount']);
+
     }
 }

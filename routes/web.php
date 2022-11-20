@@ -23,10 +23,14 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Route::get('/wallet', [App\Http\Controllers\HomeController::class, 'wallet'])->name('wallet');
 
+//service withdraw route
+Route::post('/withdraw', [App\Http\Controllers\HomeController::class, 'withdraw'])->name('withdraw');
 
 
 
 
+
+//Paystack Route
 Route::get('/wallet', [PaymentController::class, 'wallet'])->name('wallet');
 Route::post('/debit', [PaymentController::class, 'make_payment'])->name('pay');
 Route::get('/pay/callback', [PaymentController::class, 'payment_callback'])->name('pay.callback');
