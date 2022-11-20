@@ -16,7 +16,7 @@
                                         <img src="{{ URL::asset('public/backend/images/user-profile.png') }}" alt="image">
                                     </div>
                                     <div class="name-area">
-                                        <h6>Alfred Davis</h6>
+                                        <h6>{{Auth::user()->name}}</h6>
                                         <p class="active-status">Active</p>
                                     </div>
                                 </div>
@@ -24,11 +24,11 @@
                                     <ul>
                                         <li>
                                             <p>Account ID:</p>
-                                            <span class="mdr">Rex49484</span>
+                                            <span class="mdr">Zanebiz{{Auth::user()->id}}</span>
                                         </li>
                                         <li>
                                             <p>Joined:</p>
-                                            <span class="mdr">Aug 25,2021</span>
+                                            <span class="mdr">{{Auth::user()->created_at->toFormattedDateString()}}</span>
                                         </li>
                                         <li>
                                             <p>Confirm status:</p>
@@ -66,7 +66,7 @@
                                 <div class="tab-content mt-40">
                                     <div class="tab-pane fade show active" id="account" role="tabpanel"
                                         aria-labelledby="account-tab">
-                                        <div class="upload-avatar">
+                                        <!-- <div class="upload-avatar">
                                             <div class="avatar-left d-flex align-items-center">
                                                 <div class="profile-img">
                                                     <img src="{{ URL::asset('public/backend/images/user-profile-2.png') }}" alt="image">
@@ -86,34 +86,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <form action="#">
                                             <div class="row justify-content-center">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="single-input">
-                                                        <label for="fName">First Name</label>
-                                                        <input type="text" id="fName" placeholder="Alfred">
+                                                        <label for="fName">Full Name</label>
+                                                        <input type="text" id="fName" name="name" placeholder="{{Auth::user()->name}}">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="single-input">
-                                                        <label for="lName">Last Name</label>
-                                                        <input type="text" id="lName" placeholder="Davis">
-                                                    </div>
-                                                </div>
+                                               
                                                 <div class="col-md-12">
                                                     <div class="single-input">
                                                         <label for="email">Email</label>
                                                         <div class="row input-status d-flex align-items-center">
                                                             <div class="col-12">
-                                                                <input type="text" id="email" placeholder="alfred6598@gmail.com">
+                                                                <input type="text" id="email" name="email" placeholder="{{Auth::user()->email}}">
                                                             </div>
-                                                            <!-- <div class="col-6">
-                                                                <span class="pending">
-                                                                    <img src="{{ URL::asset('public/backend/images/icon/pending.png') }}" alt="icon">
-                                                                    E-mail confirmation in pending
-                                                                </span>
-                                                            </div> -->
+                                                        
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,18 +112,13 @@
                                                         <label for="phone">Phone</label>
                                                         <div class="row input-status d-flex align-items-center">
                                                             <div class="col-12">
-                                                                <input type="text" id="phone" placeholder="(316) 555-0116">
+                                                                <input type="text" id="phone" name="phone" placeholder="{{Auth::user()->phone}}">
                                                             </div>
-                                                            <!-- <div class="col-6">
-                                                                <span class="confirm">
-                                                                    <img src="{{ URL::asset('public/backend/images/icon/confirm.png') }}" alt="icon">
-                                                                    Phone number confirm
-                                                                </span>
-                                                            </div> -->
+                                                        
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
+                                                <!-- <div class="col-md-12">
                                                     <div class="single-input file">
                                                         <label>Jamb documents</label>
                                                         <div class="row input-status d-flex align-items-center">
@@ -147,24 +132,19 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="col-6">
-                                                                <span class="notconfirm">
-                                                                    <img src="{{ URL::asset('public/backend/images/icon/not-confirm.png') }}" alt="icon">
-                                                                    Person not confirmed
-                                                                </span>
-                                                            </div> -->
+                                                   
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="col-md-12">
                                                     <div class="single-input">
                                                         <label for="address">Address</label>
-                                                        <input type="text" id="address" placeholder="2972 Westheimer Rd. Santa Ana, Illinois 85486">
+                                                        <input type="text" id="address" name="address" placeholder="{{Auth::user()->address}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="btn-border">
-                                                        <button class="cmn-btn">Account</button>
+                                                        <button class="cmn-btn">Submit</button>
                                                     </div>
                                                 </div>
                                             </div>
