@@ -20,6 +20,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/wallet', [App\Http\Controllers\HomeController::class, 'wallet'])->name('wallet');
+// Route::get('/wallet', [App\Http\Controllers\HomeController::class, 'wallet'])->name('wallet');
 
+
+
+
+
+Route::get('/pay', [PaymentController::class, 'pay']);
+Route::post('/pay', [PaymentController::class, 'make_payment'])->name('pay');
+Route::get('/pay/callback', [PaymentController::class, 'payment_callback'])->name('pay.callback');
 

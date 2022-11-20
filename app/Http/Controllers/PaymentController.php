@@ -8,7 +8,7 @@ class PaymentController extends Controller
 {
     public function pay()
     {
-        return view('pay.index');
+        return view('backend.pages.wallet');
     }
     public function make_payment()
     {
@@ -55,7 +55,7 @@ class PaymentController extends Controller
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer " . env('PAYSTACK_SECRET_KEY'),
+            "Authorization: Bearer " . sk_test_8acec9d0fa7eb2dd5ffb0ada81ed471ab38c761c,
             "Cache-Control: no-cache",
         ));
 
@@ -80,7 +80,7 @@ class PaymentController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer " . env('PAYSTACK_SECRET_KEY'),
+                "Authorization: Bearer " . sk_test_8acec9d0fa7eb2dd5ffb0ada81ed471ab38c761c,
                 "Cache-Control: no-cache",
             ),
         ));
