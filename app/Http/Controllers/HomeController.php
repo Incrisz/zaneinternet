@@ -41,8 +41,15 @@ class HomeController extends Controller
             "name" => request("name"),
             "amount" => request("amount"),
         ];
-       $user =User::find(Auth::user()->id);
-       $user->withdraw($data['amount']);
+        $amount = (int) $data['amount'];
+        if ($amount > Auth::User()->wallet_balance ) {
+            return redirect()->route('wallet')->withError("Please fund your wallet");
 
+        }else {
+
+       $user =User::find(Auth::user()->id);
+       $user->withdraw($amount);
+       return redirect()->route('home')->withError($data["name"] . " paid for Successfully");
+    }
     }
 }

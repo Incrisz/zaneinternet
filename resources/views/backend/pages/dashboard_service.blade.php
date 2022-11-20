@@ -42,7 +42,7 @@
                                                     <!-- <p>Set a transfer limit for paylio payment Card</p> -->
                                                     <!-- <p class="mdr">Transfer Limit</p> -->
                                                 </div>
-                                                <form action="{{route('debit')}}" method="POST">
+                                                <form action="{{route('withdraw')}}" method="POST">
                                     @csrf 
                                                     <input name="id" id="post" value="" type="hidden">
                                                 
