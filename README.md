@@ -1,6 +1,7 @@
 # https://github.com/codetagon/integrate_paystack_laravel
 
 # https://github.com/bavix/laravel-wallet
+# https://bavix.github.io/laravel-wallet/
 
 
 

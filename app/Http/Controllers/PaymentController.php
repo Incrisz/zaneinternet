@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function pay()
+    public function wallet()
     {
         return view('backend.pages.wallet');
     }
