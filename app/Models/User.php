@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Stephenjude\Wallet\Interfaces\Wallet;
 use Stephenjude\Wallet\Traits\HasWallet;
+use App\Models\Service;
 
 class User extends Authenticatable implements Wallet
 {
@@ -34,6 +35,10 @@ class User extends Authenticatable implements Wallet
         'password',
         'remember_token',
     ];
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
 
     /**
      * The attributes that should be cast.

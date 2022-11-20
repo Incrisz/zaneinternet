@@ -14,4 +14,10 @@ class Service extends Model
         'img',
         'amount',
     ];
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'status');
+    }
+
 }
