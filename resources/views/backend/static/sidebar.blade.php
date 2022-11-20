@@ -80,7 +80,7 @@
                         </ul>
                         <ul class="bottom-item">
                             <li>
-                                <a href="#">
+                                <a href="{{route('account')}}">
                                     <img src="{{ URL::asset('public/backend/images/icon/account.png')}}" alt="Account"> <span>Account</span>
                                 </a>
                             </li>

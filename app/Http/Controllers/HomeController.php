@@ -60,4 +60,9 @@ class HomeController extends Controller
     {
         return view('backend.pages.transaction');
     }
+
+    public function account()
+    {
+        return view('backend.pages.account');
+    }
 }
