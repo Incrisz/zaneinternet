@@ -25,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+     
         $services = Service::all();
         return view('backend.pages.dashboard', compact(['services']));
     }
@@ -36,6 +37,8 @@ class HomeController extends Controller
 
     public function withdraw()
     {
+
+
         $data = [
             "id" => request("id"),
             "name" => request("name"),
@@ -51,5 +54,10 @@ class HomeController extends Controller
        $user->withdraw($amount);
        return redirect()->route('home')->withError($data["name"] . " paid for Successfully");
     }
+    }
+
+    public function transaction()
+    {
+        return view('backend.pages.transaction');
     }
 }

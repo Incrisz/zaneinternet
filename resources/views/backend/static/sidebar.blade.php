@@ -64,7 +64,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('transaction')}}">
                                     <img src="{{ URL::asset('public/backend/images/icon/transactions.png')}}" alt="Transactions"> <span>Transactions</span>
                                 </a>
                             </li>

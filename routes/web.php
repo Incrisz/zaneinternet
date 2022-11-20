@@ -26,6 +26,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //service withdraw route
 Route::post('/withdraw', [App\Http\Controllers\HomeController::class, 'withdraw'])->name('withdraw');
 
+//Transaction Route
+Route::get('/transaction', [App\Http\Controllers\HomeController::class, 'transaction'])->name('transaction');
 
 
 

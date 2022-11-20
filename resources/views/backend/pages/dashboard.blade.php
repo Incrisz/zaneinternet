@@ -49,6 +49,7 @@
                                     <h6>Our Services</h6>
                                  
                                 </div>
+
                                 <div class="row">
                                     @foreach($services as $service)
                                     <div class="col-6">
