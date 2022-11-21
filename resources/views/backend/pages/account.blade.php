@@ -87,18 +87,15 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        @if($message = Session::get('success'))
-                                            <div class="alert alert-success">
-                                        <p>{{$message}}</p>
-                                            </div>
-                                        @endif
+                                        <p style="color:red;">@if(session()->has('error')) {{session()->get('error')}} @endif</p> 
+
                                         <form action="{{route('updateaccount')}}" method="POST">
                                               @csrf
                                             <div class="row justify-content-center">
                                                 <div class="col-md-12">
                                                     <div class="single-input">
                                                         <label for="fName">Full Name</label>
-                                                        <input type="text" id="fName" name="name" placeholder="{{Auth::user()->name}}">
+                                                        <input type="text" id="fName" name="name" value="{{Auth::user()->name}}" placeholder="{{Auth::user()->name}}">
                                                     </div>
                                                 </div>
                                                
@@ -107,7 +104,7 @@
                                                         <label for="email">Email</label>
                                                         <div class="row input-status d-flex align-items-center">
                                                             <div class="col-12">
-                                                                <input type="text" id="email" name="email" placeholder="{{Auth::user()->email}}">
+                                                                <input type="text" id="email" name="email" value="{{Auth::user()->email}}" placeholder="{{Auth::user()->email}}">
                                                             </div>
                                                         
                                                         </div>
@@ -158,7 +155,8 @@
                                     </div>
                                     <div class="tab-pane fade" id="security" role="tabpanel"
                                         aria-labelledby="security-tab">
-                                   
+                                        <p style="color:red;">@if(session()->has('error')) {{session()->get('error')}} @endif</p> 
+
                                         <div class="change-pass mb-40">
                                             <div class="row">
                                                 <div class="col-sm-6">
@@ -167,24 +165,25 @@
                                                     <a href="javascript:void(0)">Forgot password?</a>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <form action="#">
+                                                <form method="POST" action="{{ route('changepassword') }}">
+                                                              @csrf 
                                                         <div class="row justify-content-center">
                                                             <div class="col-md-12">
                                                                 <div class="single-input">
                                                                     <label for="current-password">Current password</label>
-                                                                    <input type="text" id="current-password" placeholder="Current password">
+                                                                    <input type="text" id="current-password" placeholder="Current password" name="current_password" autocomplete="current-password">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="single-input">
                                                                     <label for="new-password">New password</label>
-                                                                    <input type="text" id="new-password" placeholder="New password">
+                                                                    <input type="text" id="new-password" placeholder="New password" name="new_password" autocomplete="current-password">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="single-input">
                                                                     <label for="confirm-password">Confirm New password</label>
-                                                                    <input type="text" id="confirm-password" placeholder="Confirm New password">
+                                                                    <input type="text" id="confirm-password" placeholder="Confirm New password" name="new_confirm_password" autocomplete="current-password">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">

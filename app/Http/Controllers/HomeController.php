@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\User;
 use Auth;
+use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -75,14 +77,33 @@ class HomeController extends Controller
     public function updateaccount(Request $request)
     {
          //validation rules
-
+        if ($request['name'] == null || $request['email'] == null) {
+            return back()->withError('Name or Email can\'t be left empty');
+        }else {
+            $user =Auth::user();
+            $user->name = $request['name'];
+            $user->email = $request['email'];
+            $user->phone = $request['phone'];
+            $user->address = $request['address'];
+            $user->save();
+            return back()->withError('message','Profile Updated');
+        }
      
-        $user =Auth::user();
-        $user->name = $request['name'];
-        $user->email = $request['email'];
-        $user->phone = $request['phone'];
-        $user->address = $request['address'];
-        $user->save();
-        return back()->with('message','Profile Updated');
+     
+    }
+
+    public function changepassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+   
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+   
+       
+        return back()->withError('Password change successfully');
+
     }
 }

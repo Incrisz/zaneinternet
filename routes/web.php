@@ -34,6 +34,11 @@ Route::get('/account', [App\Http\Controllers\HomeController::class, 'account'])-
 Route::post('/account', [App\Http\Controllers\HomeController::class, 'updateaccount'])->name('updateaccount');
 
 
+//Changr password route
+Route::post('/changepassword', [App\Http\Controllers\HomeController::class, 'changepassword'])->name('changepassword');
+
+
+
 
 
 //Paystack Route
