@@ -45,6 +45,11 @@ class HomeController extends Controller
             "amount" => request("amount"),
         ];
         $amount = (int) $data['amount'];
+        
+        if ($amount == 0.00) {
+            return redirect()->route('home')->withError($data["name"] . " amount not added yet");
+
+        }else {
         if ($amount > Auth::User()->wallet_balance ) {
             return redirect()->route('wallet')->withError("Please fund your wallet");
 
@@ -53,7 +58,8 @@ class HomeController extends Controller
        $user =User::find(Auth::user()->id);
        $user->withdraw($amount);
        return redirect()->route('home')->withError($data["name"] . " paid for Successfully");
-    }
+            }
+        }
     }
 
     public function transaction()
