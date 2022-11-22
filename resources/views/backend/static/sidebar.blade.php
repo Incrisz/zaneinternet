@@ -76,6 +76,11 @@
                                     <img src="{{ URL::asset('public/backend/images/icon/deposit.png')}}" alt="Deposit"> <span>Deposit Money</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{route('product')}}">
+                                    <img src="{{ URL::asset('public/backend/images/icon/deposit.png')}}" alt="Deposit"> <span>My Product</span>
+                                </a>
+                            </li>
                           
                         </ul>
                         <ul class="bottom-item">

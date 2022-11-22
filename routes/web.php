@@ -29,6 +29,9 @@ Route::post('/withdraw', [App\Http\Controllers\HomeController::class, 'withdraw'
 //Transaction Route
 Route::get('/transaction', [App\Http\Controllers\HomeController::class, 'transaction'])->name('transaction');
 
+//Product Route
+Route::get('/product', [App\Http\Controllers\HomeController::class, 'product'])->name('product');
+
 //Account Route
 Route::get('/account', [App\Http\Controllers\HomeController::class, 'account'])->name('account');
 Route::post('/account', [App\Http\Controllers\HomeController::class, 'updateaccount'])->name('updateaccount');

@@ -77,6 +77,12 @@ class HomeController extends Controller
         return view('backend.pages.account');
     }
 
+
+    public function product()
+    {
+        return view('backend.pages.product');
+    }
+
     public function updateaccount(Request $request)
     {
          //validation rules
