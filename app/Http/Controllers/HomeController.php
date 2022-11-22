@@ -60,7 +60,8 @@ class HomeController extends Controller
 
        $user =User::find(Auth::user()->id);
        $user->withdraw($amount);
-    //    $user->services->attach($id);
+       $user->services()->attach($id);
+    //    dd('passed');
        return redirect()->route('transaction')->withError($data["name"] . " paid for Successfully");
             }
         }
