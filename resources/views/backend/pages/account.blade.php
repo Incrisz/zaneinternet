@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', 'account')
+@section('title', 'Account')
 
 @section('content')
     <!-- Dashboard Section start -->

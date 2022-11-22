@@ -30,44 +30,53 @@
                         <div class="transactions-main">
                             <div class="top-items">
                                 <h6>All Transactions</h6>
-                                <div class="export-area">
+                                <!-- <div class="export-area">
                                     <ul class="d-flex align-items-center">
                                         <li><a href="javascript:void(0)"><img src="{{ URL::asset('public/backend/images/icon/printer.png')}}" alt="icon">Print</a></li>
                                         <li><a href="javascript:void(0)"><img src="{{ URL::asset('public/backend/images/icon/excel.png')}}" alt="icon">Excel</a></li>
                                         <li><a href="javascript:void(0)"><img src="{{ URL::asset('public/backend/images/icon/pdf.png')}}" alt="icon">PDF</a></li>
                                         <li><a href="javascript:void(0)"><img src="{{ URL::asset('public/backend/images/icon/csv.png')}}" alt="icon">CSV</a></li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Name/ Business</th>
+                                            <th scope="col">Service Name</th>
                                             <th scope="col">Date</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach(Auth::user()->services as $service)
                                         <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
                                             <th scope="row">
-                                                <p>Bangkok Bank</p>
-                                                <p class="mdr">Withdraw to bank account</p>
+                                                <p>{{ $service->name}}</p>
+                                                <!-- <p class="mdr">Withdraw to bank account</p> -->
                                             </th>
                                             <td>
-                                                <p>03:00 PM</p>
-                                                <p class="mdr">10 Mar 2022</p>
+                                                <p>{{ $service->pivot->created_at->toFormattedDateString()}}</p>
+                                                <!-- <p class="mdr">10 Mar 2022</p> -->
                                             </td>
+                                            @if($service->pivot->status == 0)
                                             <td>
                                                 <p class="inprogress">In Progress</p>
+                                                <p class="pending">Pending</p>
                                             </td>
+                                            @else
                                             <td>
-                                                <p>-$520</p>
-                                                <p class="mdr">$3.0</p>
+                                                <p class="completed">Completed</p>
+                                            </td>
+                                            @endif
+                                            <td>
+                                                <p>₦{{ $service->amount}}</p>
+                                                <!-- <p class="mdr">$3.0</p> -->
                                             </td>
                                         </tr>
+                                        @endforeach
                             
                                     </tbody>
                                 </table>

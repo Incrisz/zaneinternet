@@ -43,13 +43,11 @@
 
 <p>2. Your details will be sent to your email
 </p>
-<p>3. Once your Service is processed, you will be sent a confirmation email and you will also be able to printout or see status of your entry
+<p>3. Once your Service is processed, you will be sent a confirmation email and you will also be able to see status of your transaction
 </p>
 <p>For any enquiry or complain please send a mail to zaneinternetresource@gmail.com
 
-@foreach(Auth::user()->services as $service)
-<h1 style="color:red;">{{ $service->pivot->status}}</h1>
-    @endforeach
+
 </p>                            </div>
                         </div>
                     </div>
