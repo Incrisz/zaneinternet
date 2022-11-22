@@ -84,38 +84,23 @@
                                         </div> -->
                                         <p style="color:red;">@if(session()->has('error')) {{session()->get('error')}} @endif</p> 
 
-                                        <form action="{{route('updateaccount')}}" method="POST">
+                                        <form action="{{route('product.store')}}" method="POST">
                                               @csrf
                                             <div class="row justify-content-center">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="single-input">
                                                         <label for="fName">Product Name</label>
                                                         <input type="text" id="fName" name="name" value="" placeholder="product name">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        <label for="fName">Product Price</label>
+                                                        <input type="text" id="fName" name="price" value="" placeholder="product price">
+                                                    </div>
+                                                </div>
                                                
-                                                <!-- <div class="col-md-12">
-                                                    <div class="single-input">
-                                                        <label for="email">Email</label>
-                                                        <div class="row input-status d-flex align-items-center">
-                                                            <div class="col-12">
-                                                                <input type="text" id="email" name="email" value="{{Auth::user()->email}}" placeholder="{{Auth::user()->email}}">
-                                                            </div>
-                                                        
-                                                        </div>
-                                                    </div>
-                                                </div> -->
-                                                <!-- <div class="col-md-12">
-                                                    <div class="single-input">
-                                                        <label for="phone">Phone</label>
-                                                        <div class="row input-status d-flex align-items-center">
-                                                            <div class="col-12">
-                                                                <input type="text" id="phone" name="phone" placeholder="{{Auth::user()->phone}}">
-                                                            </div>
-                                                        
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+                                     
                                                 <div class="col-md-12">
                                                     <div class="single-input file">
                                                         <label>Product Image</label>
@@ -124,7 +109,7 @@
                                                                 <div class="file-upload">
                                                                     <div class="right-area">
                                                                         <label class="file">
-                                                                            <input type="file">
+                                                                            <input type="file" name="img">
                                                                             <span class="file-custom"></span>
                                                                         </label>
                                                                     </div>

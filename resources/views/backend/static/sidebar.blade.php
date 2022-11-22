@@ -77,7 +77,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('product')}}">
+                                <a href="{{route('product.index')}}">
                                     <img src="{{ URL::asset('public/backend/images/icon/deposit.png')}}" alt="Deposit"> <span>My Product</span>
                                 </a>
                             </li>

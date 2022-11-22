@@ -48,6 +48,11 @@ class User extends Authenticatable implements Wallet
         return $this->belongsToMany(Service::class, 'service_users', 'user_id', 'service_id')->withPivot('status')->withTimestamps();
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     /**
      * The attributes that should be cast.
      *

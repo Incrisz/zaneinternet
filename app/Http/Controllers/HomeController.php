@@ -78,10 +78,6 @@ class HomeController extends Controller
     }
 
 
-    public function product()
-    {
-        return view('backend.pages.product');
-    }
 
     public function updateaccount(Request $request)
     {
