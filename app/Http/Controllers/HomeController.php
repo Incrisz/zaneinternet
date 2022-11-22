@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-     
+  
         $services = Service::all();
         return view('backend.pages.dashboard', compact(['services']));
     }
@@ -47,6 +47,7 @@ class HomeController extends Controller
             "amount" => request("amount"),
         ];
         $amount = (int) $data['amount'];
+        $id = (int) $data['id'];
         
         if ($amount == 0.00) {
             return redirect()->route('home')->withError($data["name"] . " amount not added yet");
@@ -59,6 +60,7 @@ class HomeController extends Controller
 
        $user =User::find(Auth::user()->id);
        $user->withdraw($amount);
+    //    $user->services->attach($id);
        return redirect()->route('home')->withError($data["name"] . " paid for Successfully");
             }
         }
@@ -86,7 +88,7 @@ class HomeController extends Controller
             $user->phone = $request['phone'];
             $user->address = $request['address'];
             $user->save();
-            return back()->withError('message','Profile Updated');
+            return back()->withError('Profile Updated successfully');
         }
      
      

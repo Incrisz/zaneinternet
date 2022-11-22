@@ -3,17 +3,24 @@
 @section('title', 'Dashboard')
 
 @section('content')
+
+
+
+
     <!-- Dashboard Section start -->
     <section class="dashboard-section body-collapse">
         <div class="overlay pt-120">
             <div class="container-fruid">
                 <div class="row">
                 <p style="color:red;">@if(session()->has('error')) {{session()->get('error')}} @endif</p> 
-
+                
+        
                     <div class="col-xl-8 col-lg-7">
                         <div class="section-content">
                             <div class="acc-details">
-                                <div class="top-area">
+
+       
+                             <div class="top-area">
                                     <div class="left-side">
                                         <h5>Hi, {{Auth::user()->name}} !</h5>
                                         <h2>₦{{Auth::user()->wallet_balance}}</h2>
@@ -39,6 +46,10 @@
 <p>3. Once your Service is processed, you will be sent a confirmation email and you will also be able to printout or see status of your entry
 </p>
 <p>For any enquiry or complain please send a mail to zaneinternetresource@gmail.com
+
+@foreach(Auth::user()->services as $service)
+<h1 style="color:red;">{{ $service->pivot->status}}</h1>
+    @endforeach
 </p>                            </div>
                         </div>
                     </div>

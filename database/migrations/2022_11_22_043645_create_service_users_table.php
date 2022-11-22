@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreign('service_id')->references('id')->on('services');
 
             $table->boolean('status')->default(0);
-
             $table->timestamps();
         });
     }

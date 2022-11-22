@@ -9,6 +9,7 @@ class Service extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'name',
         'img',
@@ -17,7 +18,7 @@ class Service extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class, 'status');
+        return $this->belongsToMany(User::class);
     }
 
 }

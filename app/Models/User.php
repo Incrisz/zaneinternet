@@ -9,11 +9,13 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Stephenjude\Wallet\Interfaces\Wallet;
 use Stephenjude\Wallet\Traits\HasWallet;
-use App\Models\Service;
+
 
 class User extends Authenticatable implements Wallet
 {
     use HasApiTokens, HasFactory, Notifiable, HasWallet;
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -39,9 +41,11 @@ class User extends Authenticatable implements Wallet
         'password',
         'remember_token',
     ];
+  
+
     public function services()
     {
-        return $this->hasMany(Service::class);
+        return $this->belongsToMany(Service::class, 'service_users', 'user_id', 'service_id')->withPivot('status')->withTimestamps();
     }
 
     /**
