@@ -6,6 +6,7 @@
 # used
 # https://github.com/stephenjude/laravel-wallet
 
+# https://github.com/barryvdh/laravel-debugbar
 
 
 

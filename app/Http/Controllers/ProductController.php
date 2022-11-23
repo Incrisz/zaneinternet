@@ -37,6 +37,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+        
+
             // Validation for required fields (and using some regex to validate our numeric value)
             $request->validate([
                 'name'=>'required',
@@ -45,9 +47,12 @@ class ProductController extends Controller
             ]);
          // Getting values from the blade template form
 
-         //Getting image
-         $imageName = time().'.'.$request->img->extension();  
-        $request->img->move(public_path('product'), $imageName);
+
+        //  //Getting image
+        //  $imageName = time().'.'.$request->img->extension();  
+        // $request->img->move(public_path('product/'), $imageName);
+  
+        // dd('product good');
 
          $product = new Product([
             'name' => $request->get('name'),
@@ -55,9 +60,9 @@ class ProductController extends Controller
             'img' => $imageName,
             'user_id' => Auth::user()->id
         ]);
+
         $product->save();
 
-        dd('product good');
 
         // return redirect('/products')->with('success', 'product saved.');   // 
         return back()->withError('Profile Updated successfully');
