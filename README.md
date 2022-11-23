@@ -8,6 +8,8 @@
 
 # https://github.com/barryvdh/laravel-debugbar
 
+# https://github.com/brian2694/laravel-toastr
+
 
 
 

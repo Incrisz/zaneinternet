@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Auth;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -65,6 +66,8 @@ class ProductController extends Controller
 
 
         // return redirect('/products')->with('success', 'product saved.');   // 
+        Toastr::error( " Card Amount not added yet", 'Message', ["positionClass" => "toast-top-right"]);
+
         return back()->withError('Profile Updated successfully');
 
 

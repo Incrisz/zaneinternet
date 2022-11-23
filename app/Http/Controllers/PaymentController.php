@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Auth;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,9 @@ class PaymentController extends Controller
                 return back()->withError($pay->message);
             }
         } else {
-            return back()->withError("No Internet Connection");
+            Toastr::error( "No Internet Connection", 'Message', ["positionClass" => "toast-top-right"]);
+
+            return back();
         }
     }
 
@@ -44,13 +47,17 @@ class PaymentController extends Controller
                 $user = User::find(Auth::user()->id);  //Find the Auth user to fund wallet
                 $user->deposit($amount);
 
-                return redirect()->route('home')->withError("Wallet Funded Successfully");
+                Toastr::success( "Wallet Funded Successfully", 'Message', ["positionClass" => "toast-top-right"]);
+
+                return redirect()->route('home');
                 // return view('backend.pages.wallet')->with(compact(['data']));
             } else {
                 return back()->withError($response->message);
             }
         } else {
-            return back()->withError("Something went wrong");
+            Toastr::error( "Something went wrong", 'Message', ["positionClass" => "toast-top-right"]);
+
+            return back();
         }
     }
 

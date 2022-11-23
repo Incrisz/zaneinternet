@@ -9,3 +9,4 @@
     <link rel="stylesheet" href="{{ URL::asset('public/backend/css/arafat-font.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('public/backend/css/plugin/animate.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('public/backend/css/style.css')}}">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">

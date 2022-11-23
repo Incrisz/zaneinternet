@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\User;
 use Auth;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -50,11 +51,15 @@ class HomeController extends Controller
         $id = (int) $data['id'];
         
         if ($amount == 0.00) {
-            return redirect()->route('home')->withError($data["name"] . " amount not added yet");
+            Toastr::error( " Card Amount not added yet", 'Message', ["positionClass" => "toast-top-right"]);
+
+            return redirect()->route('home');
 
         }else {
         if ($amount > Auth::User()->wallet_balance ) {
-            return redirect()->route('wallet')->withError("Please fund your wallet");
+            Toastr::warning( " Please fund your wallet", 'Message', ["positionClass" => "toast-top-right"]);
+
+            return redirect()->route('wallet');
 
         }else {
 
@@ -62,7 +67,9 @@ class HomeController extends Controller
        $user->withdraw($amount);
        $user->services()->attach($id);
     //    dd('passed');
-       return redirect()->route('transaction')->withError($data["name"] . " paid for Successfully");
+    Toastr::success( " Payment made Successfully", 'Service', ["positionClass" => "toast-top-right"]);
+
+       return redirect()->route('transaction');
             }
         }
     }
@@ -91,7 +98,8 @@ class HomeController extends Controller
             $user->phone = $request['phone'];
             $user->address = $request['address'];
             $user->save();
-            return back()->withError('Profile Updated successfully');
+            Toastr::success('Profile Updated successfully', 'Account', ["positionClass" => "toast-top-right"]);
+            return back();
         }
      
      
@@ -107,8 +115,9 @@ class HomeController extends Controller
    
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
    
-       
-        return back()->withError('Password change successfully');
+        Toastr::success('Password Updated successfully', 'Account', ["positionClass" => "toast-top-right"]);
+
+        return back();
 
     }
 }
