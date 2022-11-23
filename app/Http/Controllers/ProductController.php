@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 use Brian2694\Toastr\Facades\Toastr;
+use Intervention\Image\Facades\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -48,12 +50,26 @@ class ProductController extends Controller
             ]);
          // Getting values from the blade template form
 
-
-        //  //Getting image
-        //  $imageName = time().'.'.$request->img->extension();  
-        // $request->img->move(public_path('product/'), $imageName);
+         $image = $request->img;
+         $hidurl = str_slug($request->title);
+          if(isset($image))
+          {
+  //            make unipue name for image
+              $currentDate = Carbon::now()->toDateString();
+              $imageName  = $hidurl.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
   
-        // dd('product good');
+              if(!Storage::disk('public')->exists('product'))
+              {
+                  Storage::disk('public')->makeDirectory('product');
+              }
+  
+              $productImage = Image::make($image)->save();
+              Storage::disk('public')->put('product/'.$imageName,$productImage);
+  
+          } else {
+              $imageName = "default.png";
+          }
+            dd('good');
 
          $product = new Product([
             'name' => $request->get('name'),
@@ -66,9 +82,9 @@ class ProductController extends Controller
 
 
         // return redirect('/products')->with('success', 'product saved.');   // 
-        Toastr::error( " Card Amount not added yet", 'Message', ["positionClass" => "toast-top-right"]);
+        Toastr::success( "Profile Updated successfully", 'Message', ["positionClass" => "toast-top-right"]);
 
-        return back()->withError('Profile Updated successfully');
+        return back();
 
 
     }
