@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Brian2694\Toastr\Facades\Toastr;
 use Intervention\Image\Facades\Image;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -43,20 +44,21 @@ class ProductController extends Controller
         
 
             // Validation for required fields (and using some regex to validate our numeric value)
-            $request->validate([
-                'name'=>'required',
-                'price'=>'required',
-                'img'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-            ]);
+            // $request->validate([
+            //     'name'=>'required',
+            //     'price'=>'required',
+            //     'img'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            // ]);
          // Getting values from the blade template form
-
+        //  dd('good');
+         
          $image = $request->img;
-         $hidurl = str_slug($request->title);
+         
           if(isset($image))
           {
   //            make unipue name for image
               $currentDate = Carbon::now()->toDateString();
-              $imageName  = $hidurl.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+              $imageName  = '-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
   
               if(!Storage::disk('public')->exists('product'))
               {
@@ -69,7 +71,7 @@ class ProductController extends Controller
           } else {
               $imageName = "default.png";
           }
-            dd('good');
+          
 
          $product = new Product([
             'name' => $request->get('name'),

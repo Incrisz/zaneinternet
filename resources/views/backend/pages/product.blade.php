@@ -84,7 +84,7 @@
                                         </div> -->
                                         <p style="color:red;">@if(session()->has('error')) {{session()->get('error')}} @endif</p> 
 
-                                        <form action="{{route('product.store')}}" method="POST">
+                                        <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
                                               @csrf
                                             <div class="row justify-content-center">
                                                 <div class="col-md-6">
