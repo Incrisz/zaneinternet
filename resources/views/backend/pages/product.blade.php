@@ -19,8 +19,16 @@
                                     </div>
                                     <div class="name-area">
                                         <h6>Product</h6>
-                                        <p class="active-status">Active</p>
+                                    @foreach($products as $prod)
+                                        @if($prod->status == 0)
+                                        <p class="activestatus" style="color:red;">Not Approved</p>
+                                        @else
+                                        <p class="active-status">Approved</p>
+                                        @endif
+                                        @endforeach
+
                                     </div>
+                                
                                 </div>
                                 <div class="owner-info">
                                     <ul>
@@ -29,11 +37,16 @@
                                             <p>Product Name:</p>
                                             <span class="mdr">{{$prod->name}}</span>
                                         </li>
-                                        @endforeach
+                                        <li>
+                                            <p>Product Price:</p>
+                                            <span class="mdr">₦{{$prod->price}}</span>
+                                        </li>
+                                      
                                         <li>
                                             <p>Date Uploaded:</p>
-                                            <span class="mdr">{{Auth::user()->created_at->toFormattedDateString()}}</span>
+                                            <span class="mdr">{{$prod->created_at->toFormattedDateString()}}</span>
                                         </li>
+                                     
                                         <!-- <li>
                                             <p>Confirm status:</p>
                                             <span class="mdr">80%</span>
@@ -42,10 +55,16 @@
                                 </div>
                                 <div class="owner-action">
                                     
-                                    <a href="javascript:void(0)">
+  <form id="delete-form-{{ $prod->id }}" action="{{ route('product.destroy',$prod->id) }}" method="POST"  >
+ 
+												@csrf
+												@method('DELETE')
+                                    <a href="javascript:void(0)" onclick="deleteProduct({{ $prod->id }})">
                                         <img src="{{ URL::asset('public/backend/images/icon/logout.png') }}" alt="image">
                                        Delete
                                     </a>
+                                    </form>
+                                    @endforeach
                                     <!-- <a href="javascript:void(0)" class="delete">
                                         <img src="{{ URL::asset('public/backend/images/icon/delete-2.png') }}" alt="image">
                                         Delete Account
@@ -64,31 +83,15 @@
                                  
                                 </ul>
                                 <div class="tab-content mt-40">
+                                                   
+                             
                                     <div class="tab-pane fade show active" id="account" role="tabpanel"
                                         aria-labelledby="account-tab">
-                                        <!-- <div class="upload-avatar">
-                                            <div class="avatar-left d-flex align-items-center">
-                                                <div class="profile-img">
-                                                    <img src="{{ URL::asset('public/backend/images/user-profile-2.png') }}" alt="image">
-                                                </div>
-                                                <div class="instraction">
-                                                    <h6>Your Avatar</h6>
-                                                    <p>Profile picture size: 400px x 400px</p>
-                                                </div>
-                                            </div>
-                                            <div class="avatar-right">
-                                                <div class="file-upload">
-                                                    <div class="right-area">
-                                                        <label class="file">
-                                                            <input type="file">
-                                                            <span class="file-custom"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        <p style="color:red;">@if(session()->has('error')) {{session()->get('error')}} @endif</p> 
-
+                       
+                       
+                                        @if(!$products->count() == 0)
+                                 <p>Delete the old product to upload a new one.. Thanks</p>
+                                        @else
                                         <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
                                               @csrf
                                             <div class="row justify-content-center">
@@ -137,8 +140,10 @@
                                                 </div>
                                             </div>
                                         </form>
+                                        @endif
+                                     
                                     </div>
-                               
+                                 
                                 </div>
                             </div>
                         </div>
@@ -149,129 +154,40 @@
     </section>
     <!-- Dashboard Section end -->
 
-    <!-- Add Card Popup start -->
-    <div class="add-card">
-        <div class="container-fruid">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="modal fade" id="addcardMod" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header justify-content-between">
-                                    <h6>Add Card</h6>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-                                </div>
-                                <form action="#">
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-12">
-                                            <div class="single-input">
-                                                <label for="cardNumber">Card Number</label>
-                                                <input type="text" id="cardNumber" placeholder="5890 - 6858 - 6332 - 9843">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="single-input">
-                                                <label for="cardHolder">Card Holder</label>
-                                                <input type="text" id="cardHolder" placeholder="Alfred Davis">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-input">
-                                                <label for="month">Month</label>
-                                                <input type="text" id="month" placeholder="12">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-input">
-                                                <label for="year">Year</label>
-                                                <input type="text" id="year" placeholder="2025">
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="btn-border w-100">
-                                                <button class="cmn-btn w-100">Add Card</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Add Card Popup start -->
-
-    <!-- My Card Popup start -->
-    <div class="transactions-popup mycard">
-        <div class="container-fruid">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="modal fade" id="transactionsMod" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header justify-content-between">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-                                </div>
-                                <div class="main-content">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <h5>My Cards</h5>
-                                            <div class="icon-area">
-                                                <img src="{{ URL::asset('public/backend/images/popup-card.png') }}" alt="image" class="w-100">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div class="right-area">
-                                                <div class="top-area d-flex align-items-center justify-content-between">
-                                                    <div class="card-details d-flex align-items-center">
-                                                        <img src="{{ URL::asset('public/backend/images/icon/mastercard.png') }}" alt="image">
-                                                        <span>5880 **** **** 8854</span>
-                                                    </div>
-                                                    <a href="javascript:void(0)">
-                                                        <i class="icon-h-edit"></i>
-                                                        Edit
-                                                    </a>
-                                                </div>
-                                                <ul class="payment-details">
-                                                    <li>
-                                                        <span>Card Type:</span>
-                                                        <span>Visa</span>
-                                                    </li>
-                                                    <li>
-                                                        <span>Card Holder:</span>
-                                                        <span>Alfred Davis</span>
-                                                    </li>
-                                                    <li>
-                                                        <span>Expires:</span>
-                                                        <span>12/19</span>
-                                                    </li>
-                                                    <li>
-                                                        <span>Card Number:</span>
-                                                        <span>5880 5087 3288 8854</span>
-                                                    </li>
-                                                    <li>
-                                                        <span>Total Balance:</span>
-                                                        <span>80,700.00</span>
-                                                    </li>
-                                                    <li>
-                                                        <span>Total Debt:</span>
-                                                        <span>8,250.00</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- My Card Popup start -->
 
  
 @endsection
+
+<script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
+    <script type="text/javascript">
+        function deleteProduct(id) {
+            swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    event.preventDefault();
+                    document.getElementById('delete-form-'+id).submit();
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    swal(
+                        'Cancelled',
+                        'Your data is safe :)',
+                        'error'
+                    )
+                }
+            })
+        }
+    </script>

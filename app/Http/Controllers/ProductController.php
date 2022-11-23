@@ -43,52 +43,49 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        
-
-            // Validation for required fields (and using some regex to validate our numeric value)
-            // $request->validate([
-            //     'name'=>'required',
-            //     'price'=>'required',
-            //     'img'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-            // ]);
-         // Getting values from the blade template form
-        //  dd('good');
-         
+            if ($request->img == null || $request->name == null || $request->price == null) {
+                Toastr::error( "One field is empty..Please Fill up", 'Message', ["positionClass" => "toast-top-center"]);
+            return redirect()->route('product.index');
+            } else {
+                 
          $image = $request->img;
          
-          if(isset($image))
-          {
-  //            make unipue name for image
-              $currentDate = Carbon::now()->toDateString();
-              $imageName  = '-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-  
-              if(!Storage::disk('public')->exists('product'))
-              {
-                  Storage::disk('public')->makeDirectory('product');
-              }
-  
-              $productImage = Image::make($image)->save();
-              Storage::disk('public')->put('product/'.$imageName,$productImage);
-  
-          } else {
-              $imageName = "default.png";
-          }
-          
+         if(isset($image))
+         {
+ //            make unipue name for image
+             $currentDate = Carbon::now()->toDateString();
+             $imageName  = '-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+ 
+             if(!Storage::disk('public')->exists('product'))
+             {
+                 Storage::disk('public')->makeDirectory('product');
+             }
+ 
+             $productImage = Image::make($image)->save();
+             Storage::disk('public')->put('product/'.$imageName,$productImage);
+ 
+         } else {
+             $imageName = "default.png";
+         }
+         
 
-         $product = new Product([
-            'name' => $request->get('name'),
-            'price' => $request->get('price'),
-            'img' => $imageName,
-            'user_id' => Auth::user()->id
-        ]);
+        $product = new Product([
+           'name' => $request->get('name'),
+           'price' => $request->get('price'),
+           'img' => $imageName,
+           'user_id' => Auth::user()->id
+       ]);
 
-        $product->save();
+       $product->save();
 
 
-        // return redirect('/products')->with('success', 'product saved.');   // 
-        Toastr::success( "Profile created successfully", 'Message', ["positionClass" => "toast-top-right"]);
+       // return redirect('/products')->with('success', 'product saved.');   // 
+       Toastr::success( "Product uploaded successfully", 'Message', ["positionClass" => "toast-top-right"]);
 
-        return back();
+       return back();
+            }
+
+        
 
 
     }
@@ -124,42 +121,50 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $image = $request->image;
+
+        if ($request->img == null || $request->name == null || $request->price == null) {
+            Toastr::error( "One field is empty", 'Message', ["positionClass" => "toast-top-center"]);
+            return redirect()->route('product.index');
+        } else {
+            $image = $request->img;
   
-         if(isset($image))
-         {
- //            make unipue name for image
-             $currentDate = Carbon::now()->toDateString();
-             $imageName  ='-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
- 
-             if(!Storage::disk('public')->exists('product'))
-             {
-                 Storage::disk('public')->makeDirectory('product');
-             }
-             
-             //            delete old post image
-             if (Storage::disk('public')->exists('product/'.$product->image))
-         {
-             Storage::disk('public')->delete('product/'.$product->image);
-         }
- 
-             $productImage = Image::make($image)->save();
-             Storage::disk('public')->put('product/'.$imageName,$productImage);
- 
-         } else {
-             $imageName = "";
-         }
-
-         $prod = Product::find($product);
-         $prod->name = $request->get('name');
-         $prod->price = $request->get('price');
-         $prod->img = $imageName;
-         $prod->user_id = Auth::user()->id;
-         $prod->save();
-
-         Toastr::success( "Profile Updated successfully", 'Message', ["positionClass" => "toast-top-right"]);
-         return redirect()->route('product.index');
-
+            if(isset($image))
+            {
+    //            make unipue name for image
+                $currentDate = Carbon::now()->toDateString();
+                $imageName  ='-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+    
+                if(!Storage::disk('public')->exists('product'))
+                {
+                    Storage::disk('public')->makeDirectory('product');
+                }
+                
+                //            delete old post image
+                if (Storage::disk('public')->exists('product/'.$product->image))
+            {
+                Storage::disk('public')->delete('product/'.$product->image);
+            }
+    
+                $productImage = Image::make($image)->save();
+                Storage::disk('public')->put('product/'.$imageName,$productImage);
+    
+            } else {
+                $imageName = "";
+            }
+   
+            // $prod = Product::find($id);
+            $prod->name = $request->name;
+            $prod->price = $request->price;
+            $prod->img = $imageName;
+            $prod->user_id = Auth::user()->id;
+            $prod->save();
+   
+            Toastr::success( "Product Updated successfully", 'Message', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('product.index');
+   
+        }
+        
+      
 
     }
 
