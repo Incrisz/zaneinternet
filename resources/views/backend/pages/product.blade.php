@@ -13,7 +13,9 @@
                             <div class="owner-details">
                                 <div class="profile-area">
                                     <div class="profile-img">
-                                        <img src="{{ URL::asset('public/backend/images/user-profile.png') }}" alt="image">
+                                    @foreach($products as $prod)
+                                        <img src="{{ URL::asset('storage/product/'.$prod->img) }}" alt="image">
+                                        @endforeach
                                     </div>
                                     <div class="name-area">
                                         <h6>Product</h6>
@@ -22,10 +24,12 @@
                                 </div>
                                 <div class="owner-info">
                                     <ul>
+                                        @foreach($products as $prod)
                                         <li>
                                             <p>Product Name:</p>
-                                            <span class="mdr">Zanebiz{{Auth::user()->id}}</span>
+                                            <span class="mdr">{{$prod->name}}</span>
                                         </li>
+                                        @endforeach
                                         <li>
                                             <p>Date Uploaded:</p>
                                             <span class="mdr">{{Auth::user()->created_at->toFormattedDateString()}}</span>
@@ -37,6 +41,7 @@
                                     </ul>
                                 </div>
                                 <div class="owner-action">
+                                    
                                     <a href="javascript:void(0)">
                                         <img src="{{ URL::asset('public/backend/images/icon/logout.png') }}" alt="image">
                                        Delete

@@ -19,7 +19,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.product');
+        $user = User::find(Auth::user()->id);
+        $products = $user->products;
+        return view('backend.pages.product', compact('products'));
     }
 
     /**
@@ -84,7 +86,7 @@ class ProductController extends Controller
 
 
         // return redirect('/products')->with('success', 'product saved.');   // 
-        Toastr::success( "Profile Updated successfully", 'Message', ["positionClass" => "toast-top-right"]);
+        Toastr::success( "Profile created successfully", 'Message', ["positionClass" => "toast-top-right"]);
 
         return back();
 
@@ -122,7 +124,43 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $image = $request->image;
+  
+         if(isset($image))
+         {
+ //            make unipue name for image
+             $currentDate = Carbon::now()->toDateString();
+             $imageName  ='-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+ 
+             if(!Storage::disk('public')->exists('product'))
+             {
+                 Storage::disk('public')->makeDirectory('product');
+             }
+             
+             //            delete old post image
+             if (Storage::disk('public')->exists('product/'.$product->image))
+         {
+             Storage::disk('public')->delete('product/'.$product->image);
+         }
+ 
+             $productImage = Image::make($image)->save();
+             Storage::disk('public')->put('product/'.$imageName,$productImage);
+ 
+         } else {
+             $imageName = "";
+         }
+
+         $prod = Product::find($product);
+         $prod->name = $request->get('name');
+         $prod->price = $request->get('price');
+         $prod->img = $imageName;
+         $prod->user_id = Auth::user()->id;
+         $prod->save();
+
+         Toastr::success( "Profile Updated successfully", 'Message', ["positionClass" => "toast-top-right"]);
+         return redirect()->route('product.index');
+
+
     }
 
     /**
@@ -133,6 +171,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        if (Storage::disk('public')->exists('product/'.$product->image))
+        {
+            Storage::disk('public')->delete('product/'.$product->image);
+        }
+     
+        $product->delete();
+        Toastr::success('product Successfully Deleted :)','Success');
+        return redirect()->back();
     }
 }

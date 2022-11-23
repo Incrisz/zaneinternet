@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('img');
             $table->decimal("price", 16, 2)->default(0);
+            $table->boolean('status')->default(0);
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
