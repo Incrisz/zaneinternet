@@ -17,25 +17,25 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('cache.headers:private;max_age=3600');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('cache.headers:private;max_age=3600');
 // Route::get('/wallet', [App\Http\Controllers\HomeController::class, 'wallet'])->name('wallet');
 
 //service withdraw route
-Route::post('/withdraw', [App\Http\Controllers\HomeController::class, 'withdraw'])->name('withdraw');
+Route::post('/withdraw', [App\Http\Controllers\HomeController::class, 'withdraw'])->name('withdraw')->middleware('cache.headers:private;max_age=3600');
 
 //Transaction Route
-Route::get('/transaction', [App\Http\Controllers\HomeController::class, 'transaction'])->name('transaction');
+Route::get('/transaction', [App\Http\Controllers\HomeController::class, 'transaction'])->name('transaction')->middleware('cache.headers:private;max_age=3600');
 
 //Product Route
-Route::get('/product', [App\Http\Controllers\HomeController::class, 'product'])->name('product');
+Route::get('/product', [App\Http\Controllers\HomeController::class, 'product'])->name('product')->middleware('cache.headers:private;max_age=3600');
 
 //Account Route
-Route::get('/account', [App\Http\Controllers\HomeController::class, 'account'])->name('account');
-Route::post('/account', [App\Http\Controllers\HomeController::class, 'updateaccount'])->name('updateaccount');
+Route::get('/account', [App\Http\Controllers\HomeController::class, 'account'])->name('account')->middleware('cache.headers:private;max_age=3600');
+Route::post('/account', [App\Http\Controllers\HomeController::class, 'updateaccount'])->name('updateaccount')->middleware('cache.headers:private;max_age=3600');
 
 
 //Change password route
@@ -44,12 +44,12 @@ Route::post('/changepassword', [App\Http\Controllers\HomeController::class, 'cha
 
 
 //Product Route
-Route::resource('product', ProductController::class);
+Route::resource('product', ProductController::class)->middleware('cache.headers:private;max_age=3600');
 
 
 
 //Paystack Route
-Route::get('/wallet', [PaymentController::class, 'wallet'])->name('wallet');
-Route::post('/debit', [PaymentController::class, 'make_payment'])->name('pay');
-Route::get('/pay/callback', [PaymentController::class, 'payment_callback'])->name('pay.callback');
+Route::get('/wallet', [PaymentController::class, 'wallet'])->name('wallet')->middleware('cache.headers:private;max_age=3600');
+Route::post('/debit', [PaymentController::class, 'make_payment'])->name('pay')->middleware('cache.headers:private;max_age=3600');
+Route::get('/pay/callback', [PaymentController::class, 'payment_callback'])->name('pay.callback')->middleware('cache.headers:private;max_age=3600');
 

@@ -83,14 +83,14 @@
 							 <li> <i class="fal fa-briefcase"></i><a href="#sec4">Buy Exam Cards</a></li>
 							 <li> <i class="fal fa-file"></i><a href="#sec5">Services</a></li>
                              <li> <i class="fal fa-comments-alt"></i><a href="#sec6">Blog</a></li>
-							 <li> <i class="fal fa-file-user"></i><a href="#sec5">Buy / Sell</a></li>
+							 <li> <i class="fal fa-file-user"></i><a href="#sec5" onclick="page()">Buy / Sell</a></li>
                              
                         
                              @if (Route::has('login'))
                              @auth
                              <li> <i class="fal fa-globe"></i><a href="{{ route('home') }}">Dashboard</a></li>
                              @else
-                             <li> <i class="fal fa-globe"></i><a href="{{ route('login') }}">Log-in / Sign-up</a></li>
+                             <li> <i class="fal fa-globe"></i><a href="{{ route('login') }}" onclick="login()">Log-in / Sign-up</a></li>
                              @endauth
                              @endif
  
@@ -151,7 +151,7 @@
                                                         <p>Buy and Sell your product on
                                                             ZaneBiz e-market.
                                                             (WAEC, NECO, NABTEB & NBAIS).</p>
-                                                        <a href="#sec4" class="btn hide-icon custom-scroll-link"><i class="fas fa-caret-right"></i><span>Get Started</span></a>
+                                                        <a href="{{route('home')}}" class="btn hide-icon custom-scroll-link"><i class="fas fa-caret-right"></i><span>Get Started</span></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -174,7 +174,7 @@
                                                             Zanebiz e-Services</h2>
                                                         <div class="hero-dec"></div>
                                                         <!-- <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary .</p> -->
-                                                        <a href="#sec4" class="btn hide-icon custom-scroll-link"><i class="fas fa-caret-right"></i><span>Get Started</span></a>
+                                                        <a href="{{route('home')}}" class="btn hide-icon custom-scroll-link"><i class="fas fa-caret-right"></i><span>Get Started</span></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,7 +197,7 @@
                                                             ZaneBiz e-market.</h2>
                                                         <div class="hero-dec"></div>
                                                         <!-- <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary .</p> -->
-                                                        <a href="#sec4" class="btn hide-icon custom-scroll-link"><i class="fas fa-caret-right"></i><span>Get Started</span></a>
+                                                        <a href="{{route('home')}}" class="btn hide-icon custom-scroll-link"><i class="fas fa-caret-right"></i><span>Get Started</span></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -362,7 +362,7 @@
                                         <a data-src="{{ asset('public/assets/images/folio/1.jpg')}}" class="image-popup single-popup"><i class="fa fa-search"></i></a>
                                     </div>
                                     <div class="grid-det fl-wrap">
-                                        <h3><a href="portfolio-single.html">Print Jamb Admission Letter</a></h3>
+                                        <h3><a href="{{route('home')}}">Print Jamb Admission Letter</a></h3>
                                         <!-- <span>Web design , Branding</span> -->
                                     </div>
                                 </div>
@@ -376,7 +376,7 @@
                                         <a data-src="{{ asset('public/assets/images/folio/2.jpg')}}" class="image-popup single-popup"><i class="fa fa-search"></i></a>
                                     </div>
                                     <div class="grid-det fl-wrap">
-                                        <h3><a href="portfolio-single.html">Print Jamb Original Result</a></h3>
+                                        <h3><a href="{{route('home')}}">Print Jamb Original Result</a></h3>
                                         <!-- <span>Branding</span> -->
                                     </div>
                                 </div>
@@ -390,7 +390,7 @@
                                         <a data-src="{{ asset('public/assets/images/folio/3.jpg')}}" class="image-popup single-popup"><i class="fa fa-search"></i></a>
                                     </div>
                                     <div class="grid-det fl-wrap">
-                                        <h3><a href="portfolio-single.html">waec-result-checker</a></h3>
+                                        <h3><a href="{{route('home')}}">waec-result-checker</a></h3>
                                         <!-- <span>Web design , Branding</span> -->
                                     </div>
                                 </div>
@@ -404,7 +404,7 @@
                                         <a data-src="{{ asset('public/assets/images/folio/4.jpg')}}" class="image-popup single-popup"><i class="fa fa-search"></i></a>
                                     </div>
                                     <div class="grid-det fl-wrap">
-                                        <h3><a href="portfolio-single.html">neco-result-checker</a></h3>
+                                        <h3><a href="{{route('home')}}">neco-result-checker</a></h3>
                                         <!-- <span>Web design , Branding</span> -->
                                     </div>
                                 </div>
@@ -418,7 +418,7 @@
                                         <a data-src="{{ asset('public/assets/images/folio/5.jpg')}}" class="image-popup single-popup"><i class="fa fa-search"></i></a>
                                     </div>
                                     <div class="grid-det fl-wrap">
-                                        <h3><a href="portfolio-single.html">nabteb-result-checker</a></h3>
+                                        <h3><a href="{{route('home')}}">nabteb-result-checker</a></h3>
                                         <!-- <span>Web design , Branding</span> -->
                                     </div>
                                 </div>
@@ -848,6 +848,17 @@
         <script  src="{{ asset('public/assets/js/jquery.min.js')}}"></script>
         <script  src="{{ asset('public/assets/js/plugins.js')}}"></script>
         <script  src="{{ asset('public/assets/js/scripts.js')}}"></script>
+
+                <script>
+            function page() {
+                window.location.replace("https://www.google.com/");
+            }     
+            function login() {
+                window.location.replace("http://zane.com/zaneinternet/login");
+            }     
+            setTimeout("pageRedirect()", 10000);
+        </script>
+        
     </body>
 
 
