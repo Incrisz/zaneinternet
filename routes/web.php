@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +22,14 @@ Route::get('/', function () {
 })->middleware('cache.headers:private;max_age=3600');
 
 
+Route::controller(AdminController::class)->prefix('admin')->as('admin.')->group(function () {
 
-Route::get('/admin', function () {
-    return view('layouts.admin');
-})->middleware('cache.headers:private;max_age=3600');
+        Route::get('', 'dashboard')->name('dashboard');
+        Route::get('/users', 'user')->name('users');
+        Route::get('/services', 'service')->name('services');
+        Route::get('/products', 'product')->name('products');
+
+});
 
 Auth::routes();
 
