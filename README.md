@@ -18,3 +18,5 @@
 # git push -u origin master
 
 
+# sql to laravel converter
+# https://jjlabajo.github.io/SQLtoEloquent/

@@ -49,19 +49,23 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                    <td>X</td>
+                    @foreach($products as $key=>$product)
+                    @foreach($users as $key=>$user)
+                    @if($user->id == $product->user_id)
 
-                  </tr>
-        
-                
+                      <tr>
+                        <td>{{ $key + 1}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>image</td>
+                        <td> {{ $product->name}}</td>
+                        <td>{{$product->status}}</td>
+                        <td>{{$product->created_at->toFormattedDateString()}}</td>
+
+                      </tr>
+                      @endif
+                  @endforeach
+                  @endforeach
+                          
                   </tfoot>
                 </table>
               </div>

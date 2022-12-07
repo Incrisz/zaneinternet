@@ -34,7 +34,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{ $users->count()}}</h3>
 
                 <p>Total Users</p>
               </div>
@@ -49,7 +49,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>{{ $services->count() }}<sup style="font-size: 20px"></sup></h3>
 
                 <p>Total Services</p>
               </div>
@@ -64,7 +64,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>{{ $products->count()}}</h3>
 
                 <p>Total Product</p>
               </div>

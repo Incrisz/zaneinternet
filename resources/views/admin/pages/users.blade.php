@@ -50,12 +50,10 @@
                       @foreach($users as $user)
                         <tr>
                             <td>{{ $user->id}}</td>
-                            <td>Internet
-                            Explorer 4.0
-                            </td>
-                            <td>Win 95+</td>
-                            <td> 4</td>
-                            <td>X</td>
+                            <td>{{$user->name}} </td>
+                            <td>{{$user->email}}</td>
+                            <td> {{$user->created_at}}</td>
+                            <td>₦{{$user->wallet_balance}}</td>
                         </tr>
                     @endforeach
                 
