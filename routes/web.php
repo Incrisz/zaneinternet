@@ -19,6 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware('cache.headers:private;max_age=3600');
 
+
+
+Route::get('/admin', function () {
+    return view('layouts.admin');
+})->middleware('cache.headers:private;max_age=3600');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('cache.headers:private;max_age=3600');
