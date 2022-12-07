@@ -37,4 +37,31 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    public function login(Request $request)
+    {   
+        $input = $request->all();
+   
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+   
+        if(auth()->attempt(array('username' => $input['username'], 'password' => $input['password'])))
+        {
+            if (auth()->user()->is_auth == 'company') {
+                return redirect()->route('company.dashboard');
+            }
+            elseif (auth()->user()->is_auth == 'individual') {
+                return redirect()->route('individual.dashboard');
+            }
+            if (auth()->user()->is_auth == 'admin'){
+                return redirect()->route('home');
+            }
+        }else{
+            return redirect()->back()
+                ->with('error','Username And Password Are Wrong.');
+        }
+    }
 }
