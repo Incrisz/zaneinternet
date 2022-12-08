@@ -28,8 +28,11 @@ Route::controller(AdminController::class)->prefix('admin')->as('admin.')->group(
         Route::get('/users', 'user')->name('users');
         Route::get('/services', 'service')->name('services');
         Route::get('/products', 'product')->name('products');
+        // Route::get('/product/status', 'productstatus')->name('productstatus');
+
 
 });
+Route::get('/product/status', [App\Http\Controllers\AdminController::class, 'productstatus'])->name('productstatus');
 
 Auth::routes();
 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Service;
+use App\Models\ServiceUser;
+
+
 use DB;
 
 use Illuminate\Http\Request;
@@ -30,9 +33,23 @@ class AdminController extends Controller
 
     }
 
+    public function productstatus(Request $request)
+    {
+        $product = Product::find($request->product_id);
+        $product->status = $request->status;
+        $product->save();
+  
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+
     public function service()
     {        
-        return view('admin.pages.services');
+        $users = User::all() ;
+        $services = service::all();
+        $mixers = ServiceUser::all();
+        //   dd($mixers);
+
+        return view('admin.pages.services',compact("users","services","mixers"));
 
     }
 

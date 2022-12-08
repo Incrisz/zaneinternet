@@ -32,7 +32,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title">Users DataTable </h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -52,7 +52,7 @@
                             <td>{{ $user->id}}</td>
                             <td>{{$user->name}} </td>
                             <td>{{$user->email}}</td>
-                            <td> {{$user->created_at}}</td>
+                            <td> {{$user->created_at->toFormattedDateString()}}</td>
                             <td>₦{{$user->wallet_balance}}</td>
                         </tr>
                     @endforeach

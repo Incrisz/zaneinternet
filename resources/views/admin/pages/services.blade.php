@@ -31,14 +31,14 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title">Service DataTable </h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>S/N</th>
+                    <!-- <th>S/N</th> -->
                     <th>Users Name</th>
                     <th>Paid Service</th>
                     <th>Status</th>
@@ -47,17 +47,30 @@
                   </thead>
                   <tbody>
                   <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
+                  @foreach($services as $key=>$service)
+                    @foreach($users as $key=>$user)
+                    @foreach($mixers as $key=>$mixer)
+
+                    @if($user->id == $mixer->user_id && $service->id == $mixer->service_id)
+
+                    <!-- <td>Trident</td> -->
+                    <td>{{$user->name}}</td>
+                    <td>{{$service->name}}</td>
+                    <!-- <td> {{ $mixer->status}}</td> -->
+                    <td>
+                          	<label class="switch">
+                              <input type="checkbox">
+                              <span class="slider round"></span>
+                            </label>
+                        </td>
+                    <td> {{ $mixer->created_at}}</td>
 
 
                   </tr>
-        
+                  @endif
+               @endforeach
+               @endforeach
+               @endforeach
                 
                   </tfoot>
                 </table>

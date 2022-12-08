@@ -20,7 +20,7 @@
 
 <body>
    <!-- start preloader -->
-   <div class="preloader" id="preloader"></div>
+   <!-- <div class="preloader" id="preloader"></div> -->
     <!-- end preloader -->
 
     <!-- Scroll To Top Start-->
