@@ -20,3 +20,5 @@
 
 # sql to laravel converter
 # https://jjlabajo.github.io/SQLtoEloquent/
+
+# https://medium.com/geekculture/laravel-v8-authentication-for-user-and-admin-using-middleware-f14171aa4efa
