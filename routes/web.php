@@ -5,6 +5,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ServiceController;
+use Illuminate\Support\Facades\Auth;
 
 
 /*
@@ -69,7 +70,8 @@ Route::get('/pay/callback', [PaymentController::class, 'payment_callback'])->nam
 
 
 
-Route::controller(AdminController::class)->prefix('admin')->as('admin.')->group(function () {
+Route::controller(AdminController::class)->prefix('admin')->as('admin.')->middleware(['auth', 'isAdmin'])->group(function () {
+    // Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::get('', 'dashboard')->name('dashboard');
     Route::get('/users', 'user')->name('users');
@@ -78,6 +80,6 @@ Route::controller(AdminController::class)->prefix('admin')->as('admin.')->group(
 
     Route::get('/products', 'product')->name('products');
     Route::post('/product/status', 'productstatus')->name('productstatus');
-
+// });
 
 });

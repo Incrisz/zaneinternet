@@ -28,6 +28,7 @@ class User extends Authenticatable implements Wallet
         'password',
         'phone',
         'address',
+        'user_type',
 
 
     ];
@@ -61,4 +62,8 @@ class User extends Authenticatable implements Wallet
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
+
+    
 }

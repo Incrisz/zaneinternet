@@ -12,4 +12,5 @@
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://apps.elfsight.com/p/platform.js" defer></script>
 <div class="elfsight-app-51bd447e-0b64-4a6d-b0e8-d7ecc2f8216f"></div>
+
         {!! Toastr::message() !!}

@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 
     public function dashboard()
     {
@@ -21,7 +26,7 @@ class AdminController extends Controller
    
        $products = product::all();
        $services = User::with('services')->get() ;
-
+       
         return view('admin.pages.dashboard', compact("users","products","services"));
 
     }

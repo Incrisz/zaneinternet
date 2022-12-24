@@ -85,10 +85,12 @@
                              <li> <i class="fal fa-comments-alt"></i><a href="#sec6">Blog</a></li>
 							 <li> <i class="fal fa-file-user"></i><a href="#sec5" onclick="shop()">Buy / Sell</a></li>
                              
+                             <li> <i class="fal fa-globe"></i><a href="{{ route('login') }}" onclick="login()">Log-in / Sign-up</a></li>
+
                         
                              @if (Route::has('login'))
                              @auth
-                             <li> <i class="fal fa-globe"></i><a href="{{ route('home') }}">Dashboard</a></li>
+                             <li> <i class="fal fa-globe"></i><a href="{{ route('home') }}" onclick="home()">Dashboard</a></li>
                              @else
                              <li> <i class="fal fa-globe"></i><a href="{{ route('login') }}" onclick="login()">Log-in / Sign-up</a></li>
                              @endauth
@@ -853,6 +855,9 @@
                 <script>
             function shop() {
                 window.location.replace("{{ route('shop') }}");
+            }   
+            function home() {
+                window.location.replace("{{ route('home') }}");
             }     
             function login() {
                 window.location.replace("{{ route('login') }}");
