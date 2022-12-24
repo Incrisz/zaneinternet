@@ -230,6 +230,8 @@
         <script  src="{{ asset('public/assets/js/jquery.min.js')}}"></script>
         <script  src="{{ asset('public/assets/js/plugins.js')}}"></script>
         <script  src="{{ asset('public/assets/js/scripts.js')}}"></script>
+        <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+<div class="elfsight-app-51bd447e-0b64-4a6d-b0e8-d7ecc2f8216f"></div>
 
                 <script>
                        function welcome() {
