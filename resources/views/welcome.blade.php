@@ -62,7 +62,7 @@
                 <!-- share button--> 	
                 <div class="share-button show-share">
                     
-                   <a href="{{ route('login') }}">
+                   <a href="{{ route('login') }}" >
                         <i class="fa fa-bullhorn"></i><span>Log-in/Sign-up</span>
                 </a>
                 </div>
@@ -83,7 +83,7 @@
 							 <li> <i class="fal fa-briefcase"></i><a href="#sec4">Buy Exam Cards</a></li>
 							 <li> <i class="fal fa-file"></i><a href="#sec5">Services</a></li>
                              <li> <i class="fal fa-comments-alt"></i><a href="#sec6">Blog</a></li>
-							 <li> <i class="fal fa-file-user"></i><a href="#sec5" onclick="page()">Buy / Sell</a></li>
+							 <li> <i class="fal fa-file-user"></i><a href="#sec5" onclick="shop()">Buy / Sell</a></li>
                              
                         
                              @if (Route::has('login'))
@@ -104,7 +104,7 @@
                 <div class="nav-contacts fl-wrap nv-widget">
                     <ul>
                         <li><i class="far fa-envelope"></i><a href="mailto:zanesinternetresource@gmail.com"> zanesinternetresource@gmail.com</a></li>
-                        <li><i class="far fa-map-marker"></i><a href="https://goo.gl/maps/dj5UaNJFkJ6rLNJy9" target="_blank"> Shop 16, Faculty of Arts,
+                        <li><i class="far fa-map-marker"></i><a href="#" target="_blank"> Shop 16, Faculty of Arts,
                             Nasarawa State University, Keffi</a></li>
                         <li><i class="far fa-phone"></i><a href="tel:+2348106338158"> 08106338158</a></li>
                     </ul>
@@ -689,7 +689,7 @@
                                     <div class="container">
                                         <div class="section-title fl-wrap">
                                             <h2> Testimonials<span>  and Reviews</span></h2>
-                                            <h4>Internet tend to repeat predefined chunks  look even slightly believable to use a passage of Lorem Ipsum.</h4>
+                                            <h4>Internet tend to repeat predefined chunks  look even slightly believable to use a passage.</h4>
                                         </div>
                                         <div class="testilider fl-wrap" data-effects="slide">
                                             <div class="swiper-container">
@@ -703,7 +703,7 @@
                                                                 <span class="testi-num">01.</span>
                                                             </div>
                                                             <div class="testi-text fl-wrap">
-                                                                <p>"All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words"</p>
+                                                                <p>"We were sceptical at first when the zaneebiz team proposed a Hotel Booking Portal for our establishment, but this didn&#x27;t deter them from answering all our concerns and creating a solution that has literally automated our previous processes for making reservations and bookings."</p>
                                                             </div>
                                                             <a href="#" target="_blank" class="testi-link">Via Twitter</a>
                                                         </div>
@@ -718,7 +718,7 @@
                                                                 <span class="testi-num">02.</span>
                                                             </div>
                                                             <div class="testi-text fl-wrap">
-                                                                <p>"All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words"</p>
+                                                                <p>"We were sceptical at first when the zanebiz team proposed a Hotel Booking Portal for our establishment, but this didn&#x27;t deter them from answering all our concerns and creating a solution that has literally automated our previous processes for making reservations and bookings."</p>
                                                             </div>
                                                             <a href="#" target="_blank" class="testi-link">Via Facebook</a>
                                                         </div>
@@ -762,7 +762,7 @@
                                             <!-- contact form -->
                                             <div id="contact-form">
                                                 <div id="message"></div>
-                                                <form method="post" action="https://trion.kwst.net/dark/php/contact.php" name="contactform" id="contactform">
+                                                <form method="post" action="" name="contactform" id="contactform">
                                                     <div class="input-wrap"><i class="fal fa-user-plus"></i><input name="name" type="text" id="name"  class="inputForm2" onClick="this.select()" value="Name" ></div>
                                                     <div class="input-wrap"><i class="fal fa-envelope"></i><input name="email" type="text" id="email" onClick="this.select()" value="E-mail" ></div>
                                                     <textarea name="comments"  id="comments" onClick="this.select()" >Message</textarea>
@@ -792,10 +792,10 @@
                             <div class="footer-inner">
                                 <div class="row">
                                     <div class="col-md-7">
-                                        <h3>Subscribe on our updates</h3>
-                                        <p>Praesent nec leo venenatis elit semper aliquet id ac enim. Maecenas nec mi leo. Etiam venenatis ut dui non hendrerit. Integer dictum, diam vitae blandit accumsan.</p>
+                                        <!-- <h3>Subscribe on our updates</h3>
+                                        <p>Praesent nec leo venenatis elit semper aliquet id ac enim. Maecenas nec mi leo. Etiam venenatis ut dui non hendrerit. Integer dictum, diam vitae blandit accumsan.</p> -->
                                         <!-- subcribe-form end-->   
-                                        <div class="subcribe-form fl-wrap">
+                                        <!-- <div class="subcribe-form fl-wrap">
                                             <form id="subscribe">
                                                 <div class="shadow-box fl-wrap">
                                                     <input class="enteremail" name="email" id="subscribe-email" placeholder="Your Email" spellcheck="false" type="text">
@@ -803,7 +803,7 @@
                                                 </div>
                                                 <label for="subscribe-email" class="subscribe-message"></label>
                                             </form>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <!-- footer-inner end-->
@@ -850,11 +850,11 @@
         <script  src="{{ asset('public/assets/js/scripts.js')}}"></script>
 
                 <script>
-            function page() {
-                window.location.replace("https://www.google.com/");
+            function shop() {
+                window.location.replace("{{ route('shop') }}");
             }     
             function login() {
-                window.location.replace("http://zane.com/zaneinternet/login");
+                window.location.replace("{{ route('login') }}");
             }     
             setTimeout("pageRedirect()", 10000);
         </script>

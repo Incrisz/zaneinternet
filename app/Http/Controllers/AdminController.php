@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Models\Service;
 use App\Models\ServiceUser;
 
@@ -35,11 +36,21 @@ class AdminController extends Controller
 
     public function productstatus(Request $request)
     {
-        $product = Product::find($request->product_id);
-        $product->status = $request->status;
+        $product = Product::find($request->id);
+        // $product->status = $request->status;
+        $product->status = ($product['status'] == 0 || $product['status'] == null) ? 1 : 0;
         $product->save();
   
-        return response()->json(['success'=>'Status change successfully.']);
+        Toastr::success( "updated Successfully", 'Message', ["positionClass" => "toast-top-right"]);
+    }
+    public function servicestatus(Request $request)
+    {
+        $service = ServiceUser::find($request->id);
+        $service->status = ($service['status'] == 0 || $service['status'] == null) ? 1 : 0;
+        $service->save();
+  
+        Toastr::success( "updated Successfully", 'Message', ["positionClass" => "toast-top-right"]);
+
     }
 
     public function service()

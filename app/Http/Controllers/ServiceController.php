@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 use Brian2694\Toastr\Facades\Toastr;
-
+use App\Models\Product;
+use App\Models\User;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,13 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function shop()
+    {
+        $users = User::all();
+        $products = Product::all();
+        return view("shop", compact('users','products'));
+    }
+
     public function index()
     {
         //

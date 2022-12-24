@@ -58,10 +58,8 @@
                     <td>{{$service->name}}</td>
                     <!-- <td> {{ $mixer->status}}</td> -->
                     <td>
-                          	<label class="switch">
-                              <input type="checkbox">
-                              <span class="slider round"></span>
-                            </label>
+                    <input class="switcher_input" type="checkbox"
+                                                onclick="featured_status('{{$mixer['id']}}')" {{$mixer->status  == 1?'checked':''}}>
                         </td>
                     <td> {{ $mixer->created_at}}</td>
 
@@ -89,3 +87,24 @@
   </div>
 
 @endsection
+<script>
+        function featured_status(id) {
+     
+          $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{route('admin.servicestatus')}}",
+                method: 'POST',
+                data: {
+                    id: id
+                },
+                success: function () {
+                  //  alert("successful")
+                }
+            });
+       
+        }
+</script>

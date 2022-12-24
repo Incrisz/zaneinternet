@@ -49,25 +49,17 @@ class ProductController extends Controller
             } else {
                  
          $image = $request->img;
-         
-         if(isset($image))
-         {
- //            make unipue name for image
-             $currentDate = Carbon::now()->toDateString();
-             $imageName  = '-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
- 
-             if(!Storage::disk('public')->exists('product'))
-             {
-                 Storage::disk('public')->makeDirectory('product');
-             }
- 
-             $productImage = Image::make($image)->save();
-             Storage::disk('public')->put('product/'.$imageName,$productImage);
- 
-         } else {
-             $imageName = "default.png";
-         }
-         
+
+         if ($image != null) {
+            $imageName = Carbon::now()->toDateString() . "-" . uniqid() . "." . "png";
+            if (!Storage::disk('public')->exists('product/')) {
+                Storage::disk('public')->makeDirectory('product/');
+            }
+            Storage::disk('public')->put('product/' . $imageName, file_get_contents($image));
+        } else {
+            $imageName = 'def.png';
+        }
+
 
         $product = new Product([
            'name' => $request->get('name'),

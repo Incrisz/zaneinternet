@@ -14,7 +14,7 @@
                                 <div class="profile-area">
                                     <div class="profile-img">
                                     @foreach($products as $prod)
-                                        <img src="{{ URL::asset('storage/product/'.$prod->img) }}" alt="image">
+                                        <img src="{{ URL::asset('public/storage/product/'.$prod->img) }}" alt="image">
                                         @endforeach
                                     </div>
                                     <div class="name-area">

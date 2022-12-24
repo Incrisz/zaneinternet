@@ -56,11 +56,13 @@
                       <tr>
                         <!-- <td>{{ $key + 1}}</td> -->
                         <td>{{$user->name}}</td>
-                        <td>image</td>
+                        <td><img src="{{ URL::asset('public/storage/product/'.$product->img) }}" width="90px" height="50px" alt="image"></td>
                         <td> {{ $product->name}}</td>
                         <!-- <td>{{$product->status}}</td> -->
                         <td>
-                        <input data-id="{{$product->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $product->status ? 'checked' : '' }}>
+                
+                        <input class="switcher_input" type="checkbox"
+                                                onclick="featured_status('{{$product['id']}}')" {{$product->status  == 1?'checked':''}}>
 
                         </td>
                         <td>{{$product->created_at->toFormattedDateString()}}</td>
@@ -89,23 +91,25 @@
 @endsection
 
 
-<script>
-  $(function() {
-    $('.toggle-class').change(function() {
-        var status = $(this).prop('checked') == true ? 1 : 0; 
-        var product_id = $(this).data('id'); 
-         
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '/product/status',
-            data: {'status': status, 'product_id': product_id},
-            success: function(data){
-              console.log(data.success)
-            }
-        });
-    })
-  })
 
-  
+<script>
+        function featured_status(id) {
+     
+          $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{route('admin.productstatus')}}",
+                method: 'POST',
+                data: {
+                    id: id
+                },
+                success: function () {
+                  //  alert("successful")
+                }
+            });
+       
+        }
 </script>
