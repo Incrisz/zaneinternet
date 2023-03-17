@@ -4,56 +4,42 @@
 
 @section('content')
 
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>DataTables</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+  <div class="content-body">
+            <div class="container-fluid">
+                <!-- row -->
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-       
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Transactions Table</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <!-- <button type="submit" class="btn btn-primary"><a href="edit.html">Edit</a></button> -->
+                                    <table id="example2" class="display" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                             
+                                                <th>S/N</th>
+                                                <th>Users Name</th>
+                                                <th>Paid Service</th>
+                                                <th>Status</th>
+                                                <th>Date	</th>
+                                             
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Service DataTable </h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <!-- <th>S/N</th> -->
-                    <th>Users Name</th>
-                    <th>Paid Service</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
+                                        <tr>
                   @foreach($services as $key=>$service)
                     @foreach($users as $key=>$user)
                     @foreach($mixers as $key=>$mixer)
 
                     @if($user->id == $mixer->user_id && $service->id == $mixer->service_id)
 
-                    <!-- <td>Trident</td> -->
+                    <td>{{ $user->id}}</td>
+
                     <td>{{$user->name}}</td>
                     <td>{{$service->name}}</td>
                     <!-- <td> {{ $mixer->status}}</td> -->
@@ -69,22 +55,16 @@
                @endforeach
                @endforeach
                @endforeach
-                
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
             </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
 
 @endsection
 <script>
@@ -108,3 +88,9 @@
        
         }
 </script>
+
+
+
+
+
+
